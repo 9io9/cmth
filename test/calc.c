@@ -26,5 +26,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    r = subi32(1, INT32_MIN);
+
+    if (r.has_value) {
+        fprintf(stderr, "sub should return overflow error, but not\n");
+        return 1;
+    }
+
+    r = mmodi32(-4, -3);
+
+    fres(&r);
+
+    if (r.result.data.to_i32 != 2) {
+        fprintf(stderr, "math mod returns %d, but expect %d\n", r.result.data.to_i32, 2);
+        return 1;
+    }
+
     return 0;
 }

@@ -6,7 +6,17 @@ set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/include/ec.h 
+    COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/tools/pec/pec.py ${CMAKE_CURRENT_SOURCE_DIR}/.ec ${CMAKE_CURRENT_SOURCE_DIR}/include/ec.h _LJW_CMTH_EC_H_
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/.ec ${CMAKE_CURRENT_SOURCE_DIR}/tools/pec/pec.py
+    COMMENT "convert .ec to error code header file"
+)
+
+add_custom_target(cmthgech DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/ec.h)
+
 add_library(cmth STATIC src/calc.c)
+add_dependencies(cmth cmthgech)
 
 target_include_directories(cmth PRIVATE include)
 

@@ -3,6 +3,7 @@
 #define _LJW_CMTH_CALC_H_
 
 #include "chdrs/result.h"
+#include "ec.h"
 
 Result addi32(int32_t a, int32_t b);
 Result subi32(int32_t a, int32_t b);
