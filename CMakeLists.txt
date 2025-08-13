@@ -30,12 +30,6 @@ install(
     RUNTIME DESTINATION bin
 )
 install(DIRECTORY include DESTINATION .)
-install(
-    EXPORT cmthTargets
-    FILE cmthTargets.cmake
-    NAMESPACE cmth::
-    DESTINATION lib/cmake/cmth
-)
 
 include(CMakePackageConfigHelpers)
 
