@@ -20,5 +20,43 @@ add_dependencies(cmth cmthgech)
 
 target_include_directories(cmth PRIVATE include)
 
+set_target_properties(cmth PROPERTIES EXPORT_NAME cmth)
+
+install(
+    TARGETS cmth
+    EXPORT cmthTargets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+install(DIRECTORY include DESTINATION include)
+install(
+    EXPORT cmthTargets
+    FILE cmthTargets.cmake
+    NAMESPACE cmth::
+    DESTINATION lib/cmake/cmth
+)
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+    cmthConfigVersion.cmake
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+configure_file(cmthConfig.cmake.in cmthConfig.cmake @ONLY)
+
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/cmthConfig.cmake" "${CMAKE_CURRENT_BINARY_DIR}/cmthConfigVersion.cmake"
+    DESTINATION lib/cmake/cmth
+)
+install(
+    EXPORT cmthTargets
+    FILE cmthTargets.cmake
+    NAMESPACE cmth::
+    DESTINATION lib/cmake/cmth
+)
+
 enable_testing()
 add_subdirectory(test)
