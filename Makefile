@@ -13,6 +13,7 @@ install: build/libcmth.a build/libcmth.so
 	mkdir -p install/include
 	cp -r include/* install/include/
 	cp $^ install/
+	zip -r cmth.zip include/ *.a *.so
 
 build/libcmth.a: build/calc.o
 	${AR} rcs $@ $^
