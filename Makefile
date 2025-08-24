@@ -13,7 +13,7 @@ install: build/libcmth.a build/libcmth.so
 	mkdir -p install/include
 	cp -r include/* install/include/
 	cp $^ install/
-	zip -r cmth.zip include/ *.a *.so
+	cd install && zip -r cmth.zip include/ *.a *.so
 
 build/libcmth.a: build/calc.o
 	${AR} rcs $@ $^
@@ -28,4 +28,7 @@ build/shared/calc.o: src/calc.c
 build/test/calc: test/calc.c build/libcmth.a
 	${CC} ${cflags} $^ -o $@
 
-.PHONY: build test tbuild init install
+clean:
+	rm -rf build
+
+.PHONY: build test tbuild init install clean
