@@ -15,7 +15,7 @@ install: build/libcmth.a build/libcmth.so
 	cp -r include/* install/include/
 	cp $^ install/
 	cp .sym install/
-	cd install && zip -r cmth.zip include/ *.a *.so
+	cd install && zip -r cmth.zip include/ *.a *.so .sym
 
 build/libcmth.a: build/calc.o
 	${AR} rcs $@ $^
